@@ -38,10 +38,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.reactnative.brownfield.ui.theme.ReactNativeBrownfieldTheme
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
 
 class MainActivity : ComponentActivity() {
+    companion object {
+        const val OVERLAY_PERMISSION_REQ_CODE = 1
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+                startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE)
+            }
+        }
+
         setContent {
             ReactNativeBrownfieldTheme {
                 // A surface container using the 'background' color from the theme
@@ -54,6 +70,18 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!Settings.canDrawOverlays(this)) {
+                    // SYSTEM_ALERT_WINDOW permission not granted
+                }
+            }
+        }
+    }
+
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
