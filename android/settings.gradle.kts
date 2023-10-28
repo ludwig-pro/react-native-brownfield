@@ -6,7 +6,7 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "React-Native Brownfield"
 include(":app")
- 
+includeBuild("../node_modules/@react-native/gradle-plugin")
