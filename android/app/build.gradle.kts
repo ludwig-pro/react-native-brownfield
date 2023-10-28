@@ -74,3 +74,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
+
+// Enable native modules autolinking
+apply(from = "../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+apply(from = "./nativeModulesAppBuild.gradle")
