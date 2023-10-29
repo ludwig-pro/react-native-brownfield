@@ -18,19 +18,12 @@ class MyReactActivity : Activity(), DefaultHardwareBackBtnHandler {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Dans onCreate, j'initialisez SoLoader. C'est une bibliothèque native qui permet de charger du code natif depuis des fichiers APK.
         SoLoader.init(this, false)
-        // créez une nouvelle instance de ReactRootView qui servira de conteneur pour vos composants React Native.
         reactRootView = ReactRootView(this)
 
-        // Avant on configurer l'instance ici, mais si l'on souhaite utiliser React Native dans plusieurs activités ou fragments, il faut être capable de partager l'instance via un singleton
-        // donc on a bougé la configuration dans le singleton
-        // Configuration de ReactInstanceManager, il est configuré avec divers paramètres, comme les assets du bundle JS, le module principal JS, les packages natifs, etc.
-        // Packages that cannot be autolinked yet can be added manually here, for example:
-        // packages.add(MyReactNativePackage())
-        // Remember to include them in `settings.gradle` and `app/build.gradle` too.
-
-        val packages: List<ReactPackage> = PackageList(application).packages
+        val packages: List<ReactPackage> = PackageList(application).packages.apply {
+            add(BrownfieldPackage())
+        }
 
         reactInstanceManager = ReactInstanceManager.builder()
             .setApplication(application)
@@ -42,15 +35,8 @@ class MyReactActivity : Activity(), DefaultHardwareBackBtnHandler {
             .setInitialLifecycleState(LifecycleState.RESUMED)
             .build()
 
-
-
-
-        // The string here (e.g. "MyReactNativeApp") has to match
-        // the string in AppRegistry.registerComponent() in index.js
-        // Ici, vous liez votre ReactRootView avec ReactInstanceManager et indiquez quel composant React Native doit être chargé.
         reactRootView?.startReactApplication(reactInstanceManager, "MyReactNativeApp", null)
 
-        // vous définissez ReactRootView comme vue principale de l'Activity
         setContentView(reactRootView)
     }
 
@@ -84,8 +70,6 @@ class MyReactActivity : Activity(), DefaultHardwareBackBtnHandler {
         return super.onKeyUp(keyCode, event)
     }
 
-
-    // Cette méthode est appelée lorsque l'utilisateur appuie sur le bouton "Retour".
     override fun invokeDefaultOnBackPressed() {
         super.onBackPressed()
     }

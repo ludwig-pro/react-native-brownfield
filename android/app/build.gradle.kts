@@ -24,6 +24,9 @@ android  {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -53,7 +56,14 @@ android  {
     }
 }
 
+val enableHermes = project.findProperty("react")?.let { (it as Map<*, *>)["enableHermes"] } == true
+
+
 dependencies {
+
+    if (enableHermes) {
+        implementation("org.webkit:android-jsc-intl:+")
+    }
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")

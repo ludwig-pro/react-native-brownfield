@@ -1,3 +1,7 @@
+extra["react"] = mapOf(
+    "enableHermes" to true
+)
+
 buildscript {
 
     dependencies {

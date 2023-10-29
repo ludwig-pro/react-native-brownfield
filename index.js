@@ -1,13 +1,14 @@
 import React from 'react';
 import {AppRegistry, StyleSheet, Text, View, Button, NativeModules, NativeEventEmitter} from 'react-native';
 
-const { MyReactNativeModule } = NativeModules;
-const eventEmitter = new NativeEventEmitter(MyReactNativeModule);
+const { ReactNativeBrownfield } = NativeModules;
+
 
 const HelloWorld = () => {
 
   const handleClose = () => {
-    eventEmitter.emit('closeActivity', {});
+    ReactNativeBrownfield.popToNative();
+
   };
 
   return (

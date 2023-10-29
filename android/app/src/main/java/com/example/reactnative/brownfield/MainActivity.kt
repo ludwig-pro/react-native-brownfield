@@ -54,7 +54,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             ReactNativeBrownfieldTheme {
                 OnboardingCard {
-                    // Cette partie sera exécutée lorsque l'utilisateur clique sur "Get Started Now"
                     val intent = Intent(this@MainActivity, MyReactActivity::class.java)
                     startActivity(intent)
                 }
@@ -103,11 +102,6 @@ fun OnboardingCard(onGetStartedClick: () -> Unit) {
             Box(
                 Modifier
                     .align(Alignment.CenterHorizontally)
-                    .border(
-                        width = 1.dp,
-                        color = Color.White.copy(alpha = 0.1f),
-                        shape = RoundedCornerShape(27.dp)
-                    )
                     .clip(RoundedCornerShape(27.dp)),
 
             ) {
@@ -125,7 +119,7 @@ fun OnboardingCard(onGetStartedClick: () -> Unit) {
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        "Bringing you closer than ever before to Southampton Football Club! ",
+                        "Purchase your food and beverage in-app!",
                         color = Color.White.copy(0.8f),
                         textAlign = TextAlign.Center
                     )
@@ -144,7 +138,7 @@ fun OnboardingCard(onGetStartedClick: () -> Unit) {
                         )
                     ) {
                         Text(
-                            "Get Started Now",
+                            "Open OB",
                             fontSize = 15.sp,
                             fontWeight = FontWeight.SemiBold,
                             modifier = Modifier.padding(horizontal = 40.dp, vertical = 4.dp),
@@ -162,7 +156,7 @@ fun OnboardingCard(onGetStartedClick: () -> Unit) {
 @Composable
 fun CardPreview() {
     ReactNativeBrownfieldTheme {
-        OnboardingCard(onGetStartedClick = { /* Faire quelque chose ici pour la prévisualisation */ })
+        OnboardingCard(onGetStartedClick = { /* DON'T CARE */ })
     }
 }
 
