@@ -1,7 +1,6 @@
 package com.example.reactnative.brownfield
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -44,6 +43,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        ReactInstanceManagerHolder.initialize(application)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {

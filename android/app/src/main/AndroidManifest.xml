@@ -30,6 +30,7 @@
         <!-- Ajout de l'activité DevSettingsActivity pour le mode dev -->
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
+        <!-- We need set the theme of MyReactActivity to Theme.AppCompat.Light.NoActionBar because some React Native UI components rely on this theme. -->
         <activity
             android:name=".MyReactActivity"
             android:label="@string/app_name"
