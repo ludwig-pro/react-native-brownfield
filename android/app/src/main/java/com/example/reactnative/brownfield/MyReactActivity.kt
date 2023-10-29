@@ -1,6 +1,7 @@
 package com.example.reactnative.brownfield
 
 import com.facebook.react.*
+import com.facebook.react.ReactPackage
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
 import android.app.Activity
 import android.os.Bundle
@@ -22,13 +23,15 @@ class MyReactActivity : Activity(), DefaultHardwareBackBtnHandler {
         // créez une nouvelle instance de ReactRootView qui servira de conteneur pour vos composants React Native.
         reactRootView = ReactRootView(this)
 
-        // Configuration de ReactInstanceManager, il est configuré avec divers paramètres, comme les assets du bundle JS, le module principal JS, les packages natifs, etc.
-        val reactInstanceManager = ReactInstanceManagerHolder.getReactInstanceManager()
-
         // Avant on configurer l'instance ici, mais si l'on souhaite utiliser React Native dans plusieurs activités ou fragments, il faut être capable de partager l'instance via un singleton
         // donc on a bougé la configuration dans le singleton
         // Configuration de ReactInstanceManager, il est configuré avec divers paramètres, comme les assets du bundle JS, le module principal JS, les packages natifs, etc.
-        /*
+        // Packages that cannot be autolinked yet can be added manually here, for example:
+        // packages.add(MyReactNativePackage())
+        // Remember to include them in `settings.gradle` and `app/build.gradle` too.
+
+        val packages: List<ReactPackage> = PackageList(application).packages
+
         reactInstanceManager = ReactInstanceManager.builder()
             .setApplication(application)
             .setCurrentActivity(this)
@@ -38,12 +41,8 @@ class MyReactActivity : Activity(), DefaultHardwareBackBtnHandler {
             .setUseDeveloperSupport(DEBUG)
             .setInitialLifecycleState(LifecycleState.RESUMED)
             .build()
-        */
 
-        val packages: List<ReactPackage> = PackageList(application).packages
-        // Packages that cannot be autolinked yet can be added manually here, for example:
-        // packages.add(MyReactNativePackage())
-        // Remember to include them in `settings.gradle` and `app/build.gradle` too.
+
 
 
         // The string here (e.g. "MyReactNativeApp") has to match

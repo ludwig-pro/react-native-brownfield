@@ -44,8 +44,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ReactInstanceManagerHolder.initialize(application)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
                 val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
@@ -55,10 +53,11 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ReactNativeBrownfieldTheme {
-                // A surface container using the 'background' color from the theme
-
-                    OnboardingCard()
-
+                OnboardingCard {
+                    // Cette partie sera exécutée lorsque l'utilisateur clique sur "Get Started Now"
+                    val intent = Intent(this@MainActivity, MyReactActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
     }
@@ -79,7 +78,7 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OnboardingCard() {
+fun OnboardingCard(onGetStartedClick: () -> Unit) {
     Scaffold {
     Box {
         Image(
@@ -132,7 +131,7 @@ fun OnboardingCard() {
                     )
                     Spacer(modifier = Modifier.padding(bottom = 27.dp))
                     Button(
-                        onClick = { /*TODO*/ },
+                        onClick = onGetStartedClick,
                         shape = RoundedCornerShape(percent = 50),
                         modifier = Modifier.border(
                             width = 1.dp,
@@ -163,7 +162,7 @@ fun OnboardingCard() {
 @Composable
 fun CardPreview() {
     ReactNativeBrownfieldTheme {
-        OnboardingCard()
+        OnboardingCard(onGetStartedClick = { /* Faire quelque chose ici pour la prévisualisation */ })
     }
 }
 

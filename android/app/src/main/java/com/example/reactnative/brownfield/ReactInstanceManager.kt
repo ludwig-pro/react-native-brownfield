@@ -20,7 +20,8 @@ object ReactInstanceManagerHolder {
                 .setJSMainModulePath("index")
                 .addPackages(packages)
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
-                .setInitialLifecycleState(LifecycleState.RESUMED)
+                .setInitialLifecycleState(LifecycleState.BEFORE_CREATE)
+                // .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build()
         }
     }
